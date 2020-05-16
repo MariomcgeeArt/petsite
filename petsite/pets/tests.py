@@ -8,26 +8,26 @@ from .forms import *
 class PetsPageTest(TestCase):
     def test_pets_page(self):
         #Logging in
-        user = User.objects.create_user(username='jon', password='password')
-        self.client.login(username='jon', password='password')
+        user = User.objects.create_user(username='mario', password='password')
+        self.client.login(username='mario', password='password')
 
-        Pet.objects.create(pet_name='Ghost', species='Dog', breed='Great Dane', weight_in_pounds=10, Owner=user)
+        Pet.objects.create(pet_name='jas', species='Dog', breed='mutt', weight_in_pounds=10, Owner=user)
 
         response = self.client.get('/pets/')
         #Checking if the page loaded
         self.assertEqual(response.status_code, 200)
         get_response = self.client.get(reverse('pets'))
         #Seeing if the owner exists on the page
-        self.assertContains(get_response, 'jon')
+        self.assertContains(get_response, 'mario')
 
 class PetsDetailPageTest(TestCase):
     def test_pets_page(self):
         #Logging in
-        user = User.objects.create_user(username='jon', password='password')
-        self.client.login(username='jon', password='password')
+        user = User.objects.create_user(username='mario', password='password')
+        self.client.login(username='mario', password='password')
 
-        Pet.objects.create(pet_name='Ghost', species='Dog', breed='Great Dane', weight_in_pounds=10, Owner=user)
-        pet = Pet.objects.get(pet_name='Ghost')
+        Pet.objects.create(pet_name='jas', species='Dog', breed='mutt', weight_in_pounds=10, Owner=user)
+        pet = Pet.objects.get(pet_name='jas')
         Appointment.objects.create(date_of_appointment='2020-05-08', duration_minutes=50, special_instructions='None', pet=pet)
 
         response = self.client.get('/pet/1')
@@ -39,30 +39,30 @@ class PetsDetailPageTest(TestCase):
 class PetCreationPageTest(TestCase):
     def test_submit_question_creation_form(self):
             #Logging in
-            user = User.objects.create_user(username='jon', password='password')
-            self.client.login(username='jon', password='password')
+            user = User.objects.create_user(username='mario', password='password')
+            self.client.login(username='mario', password='password')
             #Post Request
             response = self.client.post('/pet/create/', 
                 {
-                    'pet_name': 'Bayone', 
+                    'pet_name': 'jas', 
                     'species': 'Dog',
-                    'breed': 'Jack Russell',
-                    'weight_in_pounds': 5,
+                    'breed': 'mutt',
+                    'weight_in_pounds': 20,
                     'Owner': user,
                 })
             #Seeing if the response was successful
             self.assertEqual(response.status_code, 302)
             #Checking that the data was updated in the database
-            new_pet = Pet.objects.filter(pet_name='Bayone')
+            new_pet = Pet.objects.filter(pet_name='jas')
             self.assertTrue(new_pet.exists())
 
 class PetCreationPageTest(TestCase):
     def test_submit_question_creation_form(self):
             #Logging in
-            user = User.objects.create_user(username='jon', password='password')
-            self.client.login(username='jon', password='password')
+            user = User.objects.create_user(username='mario', password='password')
+            self.client.login(username='mario', password='password')
             #Creating a pet
-            pet = Pet.objects.create(pet_name='Ghost', species='Dog', breed='Great Dane', weight_in_pounds=10, Owner=user)
+            pet = Pet.objects.create(pet_name='jas', species='Dog', breed='mutt', weight_in_pounds=20, Owner=user)
 
             #Post Request
             response = self.client.post('/appointment/create/', 
