@@ -25,7 +25,7 @@ SECRET_KEY = '*6ih%0(40-0py8cybuvl2+c2f(!#k7^angh!rwm7c^4o8s&v7@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'Mariopetsite.herokuapp.com']
 
 # Where to redirect during authentication
 LOGIN_REDIRECT_URL = "/"
@@ -126,3 +126,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
