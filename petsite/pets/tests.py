@@ -11,7 +11,7 @@ class PetsPageTest(TestCase):
         user = User.objects.create_user(username='mario', password='password')
         self.client.login(username='mario', password='password')
 
-        Pet.objects.create(pet_name='jas', species='Dog', breed='mutt', weight_in_pounds=10, Owner=user)
+        Pet.objects.create(pet_name='jas', species='Dog', breed='german', weight_in_pounds=10, Owner=user)
 
         response = self.client.get('/pets/')
         #Checking if the page loaded
@@ -26,11 +26,11 @@ class PetsDetailPageTest(TestCase):
         user = User.objects.create_user(username='mario', password='password')
         self.client.login(username='mario', password='password')
 
-        Pet.objects.create(pet_name='jas', species='Dog', breed='mutt', weight_in_pounds=10, Owner=user)
+        Pet.objects.create(pet_name='jas', species='Dog', breed='german', weight_in_pounds=30, Owner=user)
         pet = Pet.objects.get(pet_name='jas')
-        Appointment.objects.create(date_of_appointment='2020-05-08', duration_minutes=50, special_instructions='None', pet=pet)
+        Appointment.objects.create(date_of_appointment='2018-2-19', duration_minutes=10, special_instructions='None', pet=pet)
 
-        response = self.client.get('/pet/1')
+        response = self.client.get('/pets/1')
         #Checking if the page loaded
         self.assertEqual(response.status_code, 200)
         #Checking the pet's details
@@ -46,8 +46,8 @@ class PetCreationPageTest(TestCase):
                 {
                     'pet_name': 'jas', 
                     'species': 'Dog',
-                    'breed': 'mutt',
-                    'weight_in_pounds': 20,
+                    'breed': 'german',
+                    'weight_in_pounds': 50,
                     'Owner': user,
                 })
             #Seeing if the response was successful
@@ -62,18 +62,18 @@ class PetCreationPageTest(TestCase):
             user = User.objects.create_user(username='mario', password='password')
             self.client.login(username='mario', password='password')
             #Creating a pet
-            pet = Pet.objects.create(pet_name='jas', species='Dog', breed='mutt', weight_in_pounds=20, Owner=user)
+            pet = Pet.objects.create(pet_name='jas', species='Dog', breed='german', weight_in_pounds=50, Owner=user)
 
             #Post Request
             response = self.client.post('/appointment/create/', 
                 {
-                    'date_of_appointment': '2020-05-08', 
-                    'duration_minutes': 45,
+                    'date_of_appointment': '2019-20-03', 
+                    'duration_minutes': 20,
                     'special_instructions': 'None',
                     'pet': pet,
                 })
             #Seeing if the response was successful
             self.assertEqual(response.status_code, 302)
             #Checking that the data was updated in the database
-            new_appointment = Appointment.objects.filter(date_of_appointment='2020-05-08')
+            new_appointment = Appointment.objects.filter(date_of_appointment='2019-20-03')
             self.assertTrue(new_appointment.exists())
