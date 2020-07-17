@@ -25,7 +25,7 @@ SECRET_KEY = '*6ih%0(40-0py8cybuvl2+c2f(!#k7^angh!rwm7c^4o8s&v7@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'Mariopetsite.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'mariopetsite.herokuapp.com']
 
 # Where to redirect during authentication
 LOGIN_REDIRECT_URL = "/"
