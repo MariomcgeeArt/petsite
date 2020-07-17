@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'pets',
     'accounts',
+    
 ]
 
 MIDDLEWARE = [
